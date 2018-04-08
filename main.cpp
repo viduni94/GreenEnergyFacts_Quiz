@@ -7,6 +7,8 @@ int number_of_questions;
 int total_score;
 int user_answer;
 
+void printMenu();
+
 class Question
 {
 private:
@@ -26,6 +28,13 @@ public:
 
 int main()
 {
+    printMenu();
+//    cout << "Enter an option" << endl;
+//    cout << "Option"
+}
+
+void printMenu()
+{
     cout << endl;
     cout << "*********************** Green Energy Facts Quiz MENUv1.0 *************************" << endl;
     cout << endl;
@@ -34,6 +43,4 @@ int main()
     cout << "                              3. Quit                                             " << endl;
     cout << endl;
     cout << "**********************************************************************************" << endl;
-//    cout << "Enter an option" << endl;
-//    cout << "Option"
 }
