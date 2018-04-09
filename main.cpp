@@ -1,16 +1,23 @@
+//Filename: main.cpp
+//Author: Sachith Wickramarachchi
+//Assignment Number : 2
+//Program for a multiple choice question quiz and determine score
+//Last Changed: April 9th, 2018
+
 #include <iostream>
 #include <string>
 #include <cstdlib>
+#include <fstream>
 
 using namespace std;
 
 int total_score;
-int user_answer;
 int option_number;
 
 int getMenuOption();
 int exitProgram();
 void quiz();
+void readFile();
 
 int main()
 {
@@ -23,7 +30,7 @@ int main()
             main();
             return 0;
         case 2:
-            cout<< "View Score" << endl;
+            readFile();
             main();
             return 0;
         case 3:
@@ -64,7 +71,8 @@ int exitProgram()
 
 void quiz() {
     total_score = 0;
-    char user_name[100], q1_answer, q2_answer, q3_answer, q4_answer, q5_answer, q6_answer, q7_answer, q8_answer, q9_answer, q10_answer;
+    char user_name[30], q1_answer, q2_answer, q3_answer, q4_answer, q5_answer, q6_answer, q7_answer, q8_answer, q9_answer, q10_answer;
+    ofstream myfile;
     
     cout << "Please enter your name: ";
     cin >> user_name;
@@ -225,7 +233,7 @@ void quiz() {
     if(q10_answer == 'a') {
         total_score += 1;
     }
-    
+
     //Feedback
     cout << "The quiz is over. Here is your feedback." << endl;
     cout << endl;
@@ -244,4 +252,32 @@ void quiz() {
         cout << endl;
         
     }
+    
+    //Write results to a text file
+    myfile.open("/Users/ViduniUsh/Desktop/MyDocs/Projects/Quiz/Quiz/results.txt", ios::out);
+    if(myfile.is_open())
+    {
+        myfile << "Name of participant: ";
+        myfile << user_name << endl;
+        myfile << "Quiz Results: " << total_score << endl;
+        myfile.close();
+    } else
+        cout << "Unable to open file";
+}
+
+//Function to read contents of the text file when option 2 is chosen
+void readFile()
+{
+    string line;
+    ifstream myfile("/Users/ViduniUsh/Desktop/MyDocs/Projects/Quiz/Quiz/results.txt");
+    if(myfile.is_open())
+    {
+        while(getline(myfile, line))
+        {
+            cout << endl;
+            cout << line << endl;
+        }
+        myfile.close();
+    } else
+        cout << "Unable to open file" << endl;
 }
